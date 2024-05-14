@@ -1,0 +1,842 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("⚔ NA|ExtraGuı ⚔", "BloodTheme")
+
+-- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Infinite Yield", "FE Admin Commands", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", true))()
+end)
+
+MainSection:NewButton("EquipTools", "AutoEquipTools", function()
+    local running = true
+    
+    -- İstenilen nesnelerin isimlerini ve işlevlerini bir tablo içinde saklayın
+    local items = {
+        {name = "Shuriken", func = function() print("Shuriken işlevi çalışıyor") end},
+        {name = "Train", func = function() print("Train işlevi çalışıyor") end},
+        {name = "Sword", func = function() print("Sword işlevi çalışıyor") end},
+        {name = "Teleport", func = function() print("Teleport işlevi çalışıyor") end}
+    }
+    
+    -- Kodun sonsuz döngüsünü başlat
+    while running do
+        wait(0.5)
+        local backpack = game.Players.LocalPlayer.Backpack
+        local character = game.Players.LocalPlayer.Character
+        
+        -- Tüm nesneleri envanterden çıkar
+        for _, v in pairs(backpack:GetChildren()) do
+            v.Parent = character
+        end
+        
+        -- Rastgele bir nesne seçin
+        local randomIndex = math.random(1, #items)
+        local randomItem = items[randomIndex]
+        
+        -- Seçilen rastgele nesnenin işlevini çağırın
+        randomItem.func()
+        
+        running = false  -- İşlevi çalıştırdığınızda döngüyü sonlandır
+    end
+end)
+
+MainSection:NewButton("Ghost Dagger", "Shuriken", function()
+    game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "GhostDagger")
+end)
+
+MainSection:NewButton("Crash", "Down Server", function()
+    local RunService = game:GetService("RunService")
+    RunService.Heartbeat:Connect(function(step)
+        game:GetService("ReplicatedStorage").RemoteEvent.SpawnCharacterEvent:FireServer("MainSpawn")
+    end)
+end)
+
+MainSection:NewButton("Negative", "Negative Jutsu", function()
+    local rs = game:GetService("ReplicatedStorage")
+    while wait(0.72) do
+        rs.RemoteEvent.AddPowerEvent:FireServer("FromTraining", -2e48)
+        wait(0.72)
+        rs.RemoteEvent.AddPowerEvent:FireServer("FromTraining", -1.9916241294912496e28)
+    end
+end)
+
+MainSection:NewButton("Auto Farm x1", "Jutsu Farm", function()
+    local trainrate = 0.72
+    local nin1 = 10
+    local nin2 = 9.999
+
+    spawn(function()
+        while true do
+            game:GetService("ReplicatedStorage").RemoteEvent.AddPowerEvent:FireServer("FromTraining", nin1)
+            wait(trainrate)
+            game:GetService("ReplicatedStorage").RemoteEvent.AddPowerEvent:FireServer("FromTraining", nin2)
+            wait(trainrate)
+        end
+    end)
+end)
+
+MainSection:NewButton("Auto Farm x2", "Jutsu Farm", function()
+    local trainrate = 0.72
+    local nin1 = 20
+    local nin2 = 19.999
+
+    spawn(function()
+        while true do
+            game:GetService("ReplicatedStorage").RemoteEvent.AddPowerEvent:FireServer("FromTraining", nin1)
+            wait(trainrate)
+            game:GetService("ReplicatedStorage").RemoteEvent.AddPowerEvent:FireServer("FromTraining", nin2)
+            wait(trainrate)
+        end
+    end)
+end)
+
+-- LOCAL PLAYER
+local Player = Window:NewTab("Player")
+local PlayerSection = Player:NewSection("Player")
+
+PlayerSection:NewButton("Insta Respawn", "FAST RESPAWN CHARACTER!!", function()
+    game:GetService("ReplicatedStorage").RemoteEvent.SpawnCharacterEvent:FireServer("MainSpawn")
+end)
+
+PlayerSection:NewButton("Anti Afk", "AFK PLAYER", function()
+    wait(0.5)
+    local ba = Instance.new("ScreenGui")
+    local ca = Instance.new("TextLabel")
+    local da = Instance.new("Frame")
+    local _b = Instance.new("TextLabel")
+    local ab = Instance.new("TextLabel")
+    ba.Parent = game.CoreGui
+    ba.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ca.Parent = ba
+    ca.Active = true
+    ca.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+    ca.Draggable = true
+    ca.Position = UDim2.new(0.698610067, 0, 0.098096624, 0)
+    ca.Size = UDim2.new(0, 370, 0, 52)
+    ca.Font = Enum.Font.SourceSansSemibold
+    ca.Text = "Anti AFK Script"
+    ca.TextColor3 = Color3.new(255, 0, 0)
+    ca.TextSize = 22
+    da.Parent = ca
+    da.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+    da.Position = UDim2.new(0, 0, 1.0192306, 0)
+    da.Size = UDim2.new(0, 370, 0, 107)
+    _b.Parent = da
+    _b.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+    _b.Position = UDim2.new(0, 0, 0.800455689, 0)
+    _b.Size = UDim2.new(0, 370, 0, 21)
+    _b.Font = Enum.Font.Arial
+    _b.Text = " GHOST "
+    _b.TextColor3 = Color3.new(255, 0, 0)
+    _b.TextSize = 20
+    ab.Parent = da
+    ab.BackgroundColor3 = Color3.new(0.176471, 0.176471, 0.176471)
+    ab.Position = UDim2.new(0, 0, 0.158377, 0)
+    ab.Size = UDim2.new(0, 370, 0, 44)
+    ab.Font = Enum.Font.ArialBold
+    ab.Text = "Status: Active"
+    ab.TextColor3 = Color3.new(255, 0, 0)
+    ab.TextSize = 20
+    local bb = game:GetService('VirtualUser')
+    game:GetService('Players').LocalPlayer.Idled:Connect(function()
+        bb:CaptureController()
+        bb:ClickButton2(Vector2.new())
+        ab.Text = "Roblox tried to kick u but i kicked him instead"
+        wait(2)
+        ab.Text = "Status : Active"
+    end)
+end)
+
+PlayerSection:NewButton("G.Member Rainbow", "Just Group Member", function()
+    _G.GroupMemberCloth = true
+    spawn(function()
+        while _G.GroupMemberCloth == true do
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("GroupMemberCloth", "GroupMemberCloth4")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("GroupMemberCloth", "GroupMemberCloth6")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("GroupMemberCloth", "GroupMemberCloth9")
+        end
+        wait(0)
+    end)
+end)
+
+PlayerSection:NewButton("Yang Rainbow", "Just Yang", function()
+    _G.YangCloth = true
+    spawn(function()
+        while _G.YangCloth == true do
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang12")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang13")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang14")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang15")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang16")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang17")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang18")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang19")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang20")
+            wait(0)
+        end
+    end)
+end)
+
+PlayerSection:NewButton("Ying Rainbow", "Just Yin", function()
+    _G.YingCloth = true
+    spawn(function()
+        while _G.YingCloth == true do
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying12")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying13")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying14")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying15")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying16")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying17")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying18")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying19")
+            wait(0)
+            game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying20")
+            wait(0)
+        end
+    end)
+end)
+
+PlayerSection:NewButton("Rainbow Shurikens", "Just Favori Shuriken", function()
+    while true do
+        wait(0.01)
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Shuriken", "Shuriken8Ying")
+        wait(0.01)
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Shuriken", "Shuriken8Yang")
+        wait(0.01)
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Shuriken", "Shuriken9Ying")
+        wait(0.01)
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Shuriken", "Shuriken9Yang")
+        wait(0.01)
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("VipPass", "Chakra")
+        wait(0.01)
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("RainbowPass", "MetallicThrowingKnives")
+        wait(0.01)
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("PizzaPass", "PizzaKunai")
+        wait(0.01)
+    end
+end)
+
+PlayerSection:NewButton("PlayerList", "Players", function()
+        while not game:IsLoaded() or not game:GetService("CoreGui") or not game:GetService("Players").LocalPlayer or not game:GetService("Players").LocalPlayer.PlayerGui or not game:GetService("CoreGui"):FindFirstChild("TopBarApp") or not game:GetService("CoreGui"):FindFirstChild("PlayerList") or not game.Players.LocalPlayer.Character do wait() end
+local on = true
+if not on then return end
+local PlaceValues = {
+    [823323202] = 1;
+}
+
+if not PlaceValues[game.PlaceId] then return end
+
+repeat task.wait(0.1) until game.Players.LocalPlayer:FindFirstChild("leaderstats")
+
+local numofstats = 0
+for i,v in ipairs(game.Players.LocalPlayer:FindFirstChild("leaderstats"):GetChildren()) do
+    numofstats = numofstats + 1
+end
+local numnum = numofstats * 110
+local xvalue = numnum + 172
+local divxvalue = xvalue - 110
+local coregui = game:GetService("CoreGui")
+local playerlist = coregui:WaitForChild("PlayerList")
+local Teams = game:GetService("Teams")
+local Players = game:GetService("Players")
+local plrsandteams = playerlist:WaitForChild("PlayerListMaster").OffsetFrame.PlayerScrollList.SizeOffsetFrame.ScrollingFrameContainer.ScrollingFrameClippingFrame.ScollingFrame.OffsetUndoFrame
+local titlebar = playerlist.PlayerListMaster.OffsetFrame.PlayerScrollList.SizeOffsetFrame:WaitForChild("TitleBar")
+local suffixes = {'','K+','M+','B+','T+','qd+','Qn+','sx+','Sp+','O+','N+','de+','Ud+','DD+','tdD+','qdD+','QnD+','sxD+','SpD+','OcD+','NvD+','Vgn+','UVg+','DVg+','TVg+','qtV+','QnV+','SeV+','SPG+','OVG+','NVG+','TGN+','UTG+','DTG+','tsTG+','qtTG+','QnTG+','ssTG+','SpTG+','OcTG+','NoAG+','UnAG+','DuAG+','TeAG+','QdAG+','QnAG+','SxAG+','SpAG+','OcAG+','NvAG+','CT+'}
+local TeamValues = {}
+local PlayerValues = {}
+local Exceptions = {
+    ['Reputation'] = 1;
+    ['Power'] = 1;
+}
+local LBExceptions = {
+    ['Realm'] = 150;
+}
+
+local function comma_value(n)
+    if tonumber(n) then
+        local left,num,right = string.match(n,'^([^%d]*%d)(%d*)(.-)$')
+        return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
+    else
+        return n
+    end
+end
+local function format(val)
+    if tonumber(val) then
+        local negative = false
+        if string.sub(val,1,1) == "-" then
+            val = string.sub(val,2,string.len(val))
+            negative = true
+        end
+        for i=1, #suffixes do
+            if tonumber(val) < 10^(i*3) then
+                local value = math.floor(val/((10^((i-1)*3))/100))/(100)..suffixes[i]
+                if negative then value = "-"..value end
+                return value
+            end
+        end
+    else
+        return val
+    end
+end
+local function GetPlayer(text)
+    for _,Player in pairs(game.Players:GetPlayers()) do
+        if string.sub(string.lower(Player.Name),1,string.len(text)) == string.lower(text) then
+            return Player
+        elseif string.sub(string.lower(Player.DisplayName),1,string.len(text)) == string.lower(text) then
+            return Player
+        elseif Player.UserId == tonumber(text) then
+            return Player
+        end
+    end
+end
+local function UpdateTeamValues()
+    for i,v in pairs(TeamValues) do
+        TeamValues[i] = 0
+    end
+    local plr
+    for i,v in pairs(Players:GetPlayers()) do
+        if v:FindFirstChild("leaderstats") then
+            plr = v
+            for i,v in pairs(v:FindFirstChild("leaderstats"):GetChildren()) do
+                if tonumber(v.Value) then
+                    TeamValues[plr.Team.Name.."_"..v.Name] = TeamValues[plr.Team.Name.."_"..v.Name] + v.Value
+                end
+            end
+        end
+    end
+    for i,v in pairs(plrsandteams:GetChildren()) do
+        if string.sub(v.Name,1,1) == "t" then
+            for i,v in pairs(v:GetChildren()) do
+                if string.lower(string.sub(v.Name,1,8)) == "gamestat" then
+                    local statname = string.sub(v.Name,10,string.len(v.Name))
+                    if Exceptions[statname] then
+                        if tonumber(TeamValues[v.Parent.NameFrame.BGFrame.OverlayFrame.TeamName.Text.."_"..statname]) then
+                            v.OverlayFrame.StatText.Text = format(TeamValues[v.Parent.NameFrame.BGFrame.OverlayFrame.TeamName.Text.."_"..statname])
+                        else
+                            v.OverlayFrame.StatText.Text = "-"
+                        end
+                    else
+                        if tonumber(TeamValues[v.Parent.NameFrame.BGFrame.OverlayFrame.TeamName.Text.."_"..statname]) then
+                            v.OverlayFrame.StatText.Text = comma_value(TeamValues[v.Parent.NameFrame.BGFrame.OverlayFrame.TeamName.Text.."_"..statname])
+                        else
+                            v.OverlayFrame.StatText.Text = "-"
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+local function UpdatePlayerStats(plr)
+    repeat task.wait(0.1) until plr:FindFirstChild("leaderstats")
+    for i,v in pairs(plr:FindFirstChild("leaderstats"):GetChildren()) do
+        if not PlayerValues[plr.Name.."_"..v.Name] then
+            PlayerValues[plr.Name.."_"..v.Name] = 0
+        end
+        PlayerValues[plr.Name.."_"..v.Name] = v.Value
+    end
+    for i,v in pairs(plrsandteams:GetChildren()) do
+        if string.sub(v.Name,1,1) == "p" then
+            if GetPlayer(string.sub(v.Name,3,string.len(v.Name))) == plr then
+                for i,v in pairs(v.ChildrenFrame:GetChildren()) do
+                    if string.lower(string.sub(v.Name,1,8)) == "gamestat" then
+                        local statname = string.sub(v.Name,10,string.len(v.Name))
+                        if Exceptions[statname] then
+                            v.OverlayFrame.StatText.Text = format(PlayerValues[plr.Name.."_"..statname])
+                        else
+                            v.OverlayFrame.StatText.Text = comma_value(PlayerValues[plr.Name.."_"..statname])
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+local function UpdatePlayerListSize()
+    for i,v in pairs(plrsandteams:GetChildren()) do
+        if string.sub(v.Name,1,1) == "t" then
+            for i,v in pairs(v:GetChildren()) do
+                if v.Name == "BackgroundExtender" then
+                    if v.Size ~= UDim2.new(1,0,1,0) then
+                        v.Size = UDim2.new(1,0,1,0)
+                    end
+                end
+                if string.lower(string.sub(v.Name,1,8)) == "gamestat" then
+                    local statname = string.sub(v.Name,10,string.len(v.Name))
+                    if v.Size ~= UDim2.new(1,-divxvalue,1,0) then
+                        v.Size = UDim2.new(1,-divxvalue,1,0)
+                    end
+                end
+            end
+        elseif string.sub(v.Name,1,1) == "p" then
+            for i,v in pairs(v.ChildrenFrame:GetChildren()) do
+                if v.Name == "BackgroundExtender" then
+                    if v.Size ~= UDim2.new(1,0,1,0) then
+                        v.Size = UDim2.new(1,0,1,0)
+                    end
+                end
+                if string.lower(string.sub(v.Name,1,8)) == "gamestat" then
+                    local statname = string.sub(v.Name,10,string.len(v.Name))
+                    if v.Size ~= UDim2.new(1,-divxvalue,1,0) then
+                        v.Size = UDim2.new(1,-divxvalue,1,0)
+                    end
+                end
+            end
+        end
+    end
+    for i,v in pairs(titlebar.ChildrenFrame:GetChildren()) do
+        if string.lower(string.sub(v.Name,1,4)) == "stat" then
+            local statname = string.sub(v.Name,10,string.len(v.Name))
+            if v.Size ~= UDim2.new(1,-divxvalue,1,0) then
+                v.Size = UDim2.new(1,-divxvalue,1,0)
+            end
+        end
+    end
+end
+
+for i,v in pairs(game.Teams:GetChildren()) do
+    local teamname = v.Name
+    for i,v in pairs(Players.LocalPlayer:FindFirstChild("leaderstats"):GetChildren()) do
+        TeamValues[teamname.."_"..v.Name] = 0
+    end
+end
+
+for i,v in pairs(Players:GetPlayers()) do
+    task.spawn(function()
+        repeat task.wait() until v:FindFirstChild("leaderstats")
+        if v:FindFirstChild("leaderstats") then
+            local plr = v
+            for i,v in pairs(v:FindFirstChild("leaderstats"):GetChildren()) do
+                v:GetPropertyChangedSignal("Value"):Connect(function()
+                    UpdateTeamValues()
+                    UpdatePlayerStats(plr)
+                end)
+            end
+            UpdatePlayerStats(plr)
+        end
+        UpdatePlayerListSize()
+    end)
+end
+
+Players.PlayerAdded:Connect(function(plr)
+    repeat task.wait() until plr:FindFirstChild("leaderstats")
+    repeat
+        task.wait()
+        local plrnumofstats = 0
+        for i,v in ipairs(plr:FindFirstChild("leaderstats"):GetChildren()) do
+            plrnumofstats = plrnumofstats + 1
+        end
+    until plrnumofstats == numofstats
+    for i,v in pairs(plr:FindFirstChild("leaderstats"):GetChildren()) do
+        v:GetPropertyChangedSignal("Value"):Connect(function()
+            UpdateTeamValues()
+            UpdatePlayerStats(plr)
+        end)
+    end
+    task.wait(0.5)
+    UpdatePlayerStats(plr)
+    UpdatePlayerListSize()
+end)
+Players.PlayerRemoving:Connect(function(plr)
+    UpdateTeamValues()
+end)
+
+playerlist.PlayerListMaster.Size = UDim2.new(0,xvalue,0,680)
+UpdatePlayerListSize()
+
+task.spawn(function()
+    while task.wait(1) do
+        for i,plr in pairs(Players:GetPlayers()) do
+            UpdatePlayerStats(plr)
+        end
+        UpdateTeamValues()
+        UpdatePlayerListSize()
+    end
+end)
+    end)
+
+-- Favorite
+local Favorite = Window:NewTab("Favorite")
+local FavoriteSection = Favorite:NewSection("Favorite")
+
+FavoriteSection:NewButton("Fast Tool", "Fast All", function()
+        local d=string.byte;local r=string.char;local c=string.sub;local u=table.concat;local h=math.ldexp;local W=getfenv or function()return _ENV end;local l=setmetatable;local s=select;local a=unpack;local f=tonumber;local function b(d)local e,n,t="","",{}local a=256;local o={}for l=0,a-1 do o[l]=r(l)end;local l=1;local function i()local e=f(c(d,l,l),36)l=l+1;local n=f(c(d,l,l+e-1),36)l=l+e;return n end;e=r(i())t[1]=e;while l<#d do local l=i()if o[l]then n=o[l]else n=e..c(e,1,1)end;o[a]=e..c(n,1,1)t[#t+1],e,a=n,n,a+1 end;return table.concat(t)end;local f=b('21X21W27527621W27427521Y27921W21121X22727621V22422C21W24T22421W25G21U27625127527P22C25025725127K25G21X22427W24M27N27528524L28527724X27628128328522027624P27727K21W24Z28K28A27621S28524R28521Z27627B27621121Y28G27521821721721B1Y21D21621321C21921721621Y21S27621F21121921C21W27Q27521T27V25724M28K21X22K28322K27522121W27W24U28P22K22S21W24N29W21W21T28225724I28528Q27528S275');local o=bit and bit.bxor or function(l,e)local n,o=1,0 while l>0 and e>0 do local a,c=l%2,e%2 if a~=c then o=o+n end l,e,n=(l-a)/2,(e-c)/2,n*2 end if l<e then l=e end while l>0 do local e=l%2 if e>0 then o=o+n end l,n=(l-e)/2,n*2 end return o end local function l(e,l,n)if n then local l=(e/2^(l-1))%2^((n-1)-(l-1)+1);return l-l%1;else local l=2^(l-1);return(e%(l+l)>=l)and 1 or 0;end;end;local e=1;local function n()local n,c,a,l=d(f,e,e+3);n=o(n,68)c=o(c,68)a=o(a,68)l=o(l,68)e=e+4;return(l*16777216)+(a*65536)+(c*256)+n;end;local function t()local l=o(d(f,e,e),68);e=e+1;return l;end;local function i()local e=n();local o=n();local c=1;local n=(l(o,1,20)*(2^32))+e;local e=l(o,21,31);local l=((-1)^l(o,32));if(e==0)then if(n==0)then return l*0;else e=1;c=0;end;elseif(e==2047)then return(n==0)and(l*(1/0))or(l*(0/0));end;return h(l,e-1023)*(c+(n/(2^52)));end;local h=n;local function b(l)local n;if(not l)then l=h();if(l==0)then return'';end;end;n=c(f,e,e+l-1);e=e+l;local e={}for l=1,#n do e[l]=r(o(d(c(n,l,l)),68))end return u(e);end;local e=n;local function f(...)return{...},s('#',...)end local function u()local d={0,0,0,0,0,0,0,0,0,0,0};local e={0};local c={};local a={d,nil,e,nil,c};for l=1,n()do e[l-1]=u();end;local e=n()local c={0,0,0};for n=1,e do local e=t();local l;if(e==0)then l=(t()~=0);elseif(e==3)then l=i();elseif(e==2)then l=b();end;c[n]=l;end;a[2]=c a[4]=t();for a=1,n()do local c=o(n(),4);local n=o(n(),229);local o=l(c,1,2);local e=l(n,1,11);local e={e,l(c,3,11),nil,nil,n};if(o==0)then e[3]=l(c,12,20);e[5]=l(c,21,29);elseif(o==1)then e[3]=l(n,12,33);elseif(o==2)then e[3]=l(n,12,32)-1048575;elseif(o==3)then e[3]=l(n,12,32)-1048575;e[5]=l(c,21,29);end;d[a]=e;end;return a;end;local function r(l,e,c)local o=l[1];local n=l[2];local e=l[3];local l=l[4];return function(...)local u=o;local t=n;local h=e;local n=l;local l=f local o=1;local d=-1;local W={};local i={...};local f=s('#',...)-1;local l={};local e={};for l=0,f do if(l>=n)then W[l-n]=i[l+1];else e[l]=i[l+1];end;end;local l=f-n+1 local l;local n;while true do l=u[o];n=l[1];if n<=10 then if n<=4 then if n<=1 then if n==0 then o=o+l[3];else local o=l[2];local t={};local n=0;local c=o+l[3]-1;for l=o+1,c do n=n+1;t[n]=e[l];end;local c={e[o](a(t,1,c-o))};local l=o+l[5]-2;n=0;for l=o,l do n=n+1;e[l]=c[n];end;d=l;end;elseif n<=2 then do return end;elseif n>3 then local l=l[2];do return e[l]();end;else c[t[l[3]]]=e[l[2]];end;elseif n<=7 then if n<=5 then if not e[l[2]]then o=o+1;else o=o+l[3];end;elseif n>6 then e[l[2]]=c[t[l[3]]];else local o=l[2];local c={};local n=0;local t=o+l[3]-1;for l=o+1,t do n=n+1;c[n]=e[l];end;local c={e[o](a(c,1,t-o))};local l=o+l[5]-2;n=0;for l=o,l do n=n+1;e[l]=c[n];end;d=l;end;elseif n<=8 then e[l[2]]=e[l[3]];elseif n==9 then e[l[2]]=r(h[l[3]],nil,c);else do return end;end;elseif n<=15 then if n<=12 then if n==11 then local c=l[2];local o=d;local n={};local l=0;for o=c,o do l=l+1;n[l]=e[o];end;do return a(n,1,l)end;else if not e[l[2]]then o=o+1;else o=o+l[3];end;end;elseif n<=13 then e[l[2]]=c[t[l[3]]];elseif n>14 then e[l[2]]=r(h[l[3]],nil,c);else local n=l[2];local o={};local l=n+l[3]-1;for l=n+1,l do o[#o+1]=e[l];end;do return e[n](a(o,1,l-n))end;end;elseif n<=18 then if n<=16 then local o=l[2];local c=d;local n={};local l=0;for o=o,c do l=l+1;n[l]=e[o];end;do return a(n,1,l)end;elseif n==17 then local l=l[2];do return e[l]();end;else local n=l[2];local o={};local l=n+l[3]-1;for l=n+1,l do o[#o+1]=e[l];end;do return e[n](a(o,1,l-n))end;end;elseif n<=19 then c[t[l[3]]]=e[l[2]];elseif n>20 then e[l[2]]=e[l[3]];else o=o+l[3];end;o=o+1;end;end;end;return r(u(),{},W())();
+    end)
+
+FavoriteSection:NewButton("Hit Event", "For Sword", function()
+          		while true do
+
+		game:GetService("Players").LocalPlayer.Character.Sword.HitEvent:FireServer()
+
+		wait(0.1)end
+		end)
+
+FavoriteSection:NewButton("Yang-10M", "Sword", function()
+        local args = {
+		[1] = "Sword",
+		[2] = "BlackAndWhiteWingedSword"
+	}
+
+	game:GetService("ReplicatedStorage").RemoteEvent.GiveItemEvent:FireServer(unpack(args))
+    end)
+
+FavoriteSection:NewButton("Yin-10M", "Sword", function()
+        local args = {
+		[1] = "Sword",
+		[2] = "UltraKatana"
+	}
+
+	game:GetService("ReplicatedStorage").RemoteEvent.GiveItemEvent:FireServer(unpack(args))
+    end)
+
+FavoriteSection:NewButton("LightUp", "Sword", function()
+        local args = {
+		[1] = "Sword",
+		[2] = "LightUpSword"
+	}
+
+	game:GetService("ReplicatedStorage").RemoteEvent.GiveItemEvent:FireServer(unpack(args))
+    end)
+
+FavoriteSection:NewButton("WhiteGoldBlueFlower", "Sword", function()
+        local args = {
+		[1] = "Sword",
+		[2] = "WhiteGoldBlueFlowerSword"
+	}
+
+	game:GetService("ReplicatedStorage").RemoteEvent.GiveItemEvent:FireServer(unpack(args))
+    end)
+
+FavoriteSection:NewButton("NoFog", "GameGraphic", function()
+        game.Lighting.FogEnd = 100000
+game.Lighting.FogStart = 100000
+    end)
+
+-- Jutsu Cloth
+local JutsuCloth = Window:NewTab("JutsuCloth")
+local JutsuClothSection = JutsuCloth:NewSection("JutsuCloth")
+JutsuClothSection:NewButton("Yang-10M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang26")
+    end)
+
+JutsuClothSection:NewButton("Yang-7.5M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang25")
+    end)
+
+JutsuClothSection:NewButton("Yang-5M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang24")
+    end)
+
+JutsuClothSection:NewButton("Yang-3.5M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang23")
+    end)
+
+JutsuClothSection:NewButton("Yang-2.7M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang22")
+    end)
+
+JutsuClothSection:NewButton("Yang-2.2M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Yang21")
+    end)
+
+JutsuClothSection:NewButton("Yin-10M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying26")
+    end)
+
+JutsuClothSection:NewButton("Yin-7.5M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying25")
+    end)
+
+JutsuClothSection:NewButton("Yin-5M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying24")
+    end)
+
+JutsuClothSection:NewButton("Yin-3.5M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying23")
+    end)
+
+JutsuClothSection:NewButton("Yin-2.2M-Cloth", "Cloth", function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("Cloth", "Ying21")
+    end)
+
+-- Group Member
+local Group = Window:NewTab("Group")
+local GroupSection = Group:NewSection("Group")
+GroupSection:NewButton("Pınk","Cloth",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("GroupMemberCloth", "GroupMemberCloth1")
+        end)
+
+GroupSection:NewButton("Black","Cloth",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("GroupMemberCloth", "GroupMemberCloth4")
+        end)
+
+GroupSection:NewButton("Yellow","Cloth",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("GroupMemberCloth", "GroupMemberCloth6")
+        end)
+
+GroupSection:NewButton("Red","Cloth",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("GroupMemberCloth", "GroupMemberCloth9")
+        end)
+
+--Passes 
+local Passes = Window:NewTab("Passes")
+local PassesSection = Passes:NewSection("Passes")
+PassesSection:NewButton("RainbowCloth","Cloth",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("RainbowPass", "RainbowPackCloth")
+    end)
+
+PassesSection:NewButton("RainbowSword","Sword",function()
+       game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("RainbowPass", "UnicornSword")
+    end)
+
+PassesSection:NewButton("RainbowShruiken","Shruiken",function()
+       game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("RainbowPass", "MetallicThrowingKnives")
+    end)
+
+PassesSection:NewButton("VipCloth","Cloth",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("VipPass", "VipPackCloth")
+    end)
+
+PassesSection:NewButton("BoneScythe","Sword",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("VipPass", "BoneScythe")
+    end)
+
+PassesSection:NewButton("ScytheOfSingularity","Sword",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("VipPass", "ScytheOfSingularity")
+    end)
+
+PassesSection:NewButton("BatWingScythe","Sword",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("VipPass", "BatWingScythe")
+    end)
+
+PassesSection:NewButton("GrimAxe","Sword",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("VipPass", "GrimAxe")
+    end)
+
+PassesSection:NewButton("Chakra","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("VipPass", "Chakra")
+    end)
+
+PassesSection:NewButton("PizzaCloth","Cloth",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("PizzaPass", "PizzaPackCloth")
+    end)
+
+PassesSection:NewButton("PizzaSword","Sword",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("PizzaPass", "PizzaSword")
+    end)
+
+PassesSection:NewButton("PizzaKunai","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("PizzaPass", "PizzaKunai")
+    end)
+
+--FunnyThrow Pass
+local FunnyPass = Window:NewTab("FunnyPass")
+local FunnPassSection = FunnyPass:NewSection("FunnyPass")
+FunnPassSection:NewButton("BoomerangDagger","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "BoomerangDagger")
+    end)
+
+FunnPassSection:NewButton("DarkageKunai","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "DarkageKunai")
+    end)
+
+FunnPassSection:NewButton("GrabBag","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "GrabBag")
+    end)
+
+FunnPassSection:NewButton("OctopusCannon","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "OctopusCannon")
+    end)
+
+FunnPassSection:NewButton("StarfishShuriken","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "StarfishShuriken")
+    end)
+
+FunnPassSection:NewButton("ThrowingDonuts","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "ThrowingDonuts")
+    end)
+
+FunnPassSection:NewButton("FlowerStar1","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "FlowerStar1")
+    end)
+
+FunnPassSection:NewButton("FlowerStar2","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnyThrowPass", "FlowerStar2")
+    end)
+
+FunnPassSection:NewButton("StopSignAxe","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "StopSignAxe")
+    end)
+
+FunnPassSection:NewButton("DualPlungers","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "DualPlungers")
+    end)
+
+FunnPassSection:NewButton("GuitarSword","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "GuitarSword")
+    end)
+
+FunnPassSection:NewButton("SpringtimeCutlass","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "SpringtimeCutlass")
+    end)
+
+FunnPassSection:NewButton("FryingPan","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "Frying Pan")
+    end)
+
+FunnPassSection:NewButton("SummerSword","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "SummerSword")
+    end)
+
+FunnPassSection:NewButton("BigBugNet","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "BigBugNet")
+    end)
+
+FunnPassSection:NewButton("Mackerel","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "Mackerel")
+    end)
+
+FunnPassSection:NewButton("BoardWithANailInIt","Shuriken",function()
+        game.ReplicatedStorage.RemoteEvent.GiveItemEvent:FireServer("FunnySwordPass", "BoardWithANailInIt")
+    end)
+
+-- Multi
+local Multi = Window:NewTab("Multi")
+local MultiSection = Multi:NewSection("Multi")
+MultiSection:NewButton("MultiInventory","MultiTools",function()
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RemoteEvent = ReplicatedStorage:WaitForChild("RemoteEvent")
+local SpawnCharacterEvent = RemoteEvent:WaitForChild("SpawnCharacterEvent")
+
+for i = 1, 25 do
+    SpawnCharacterEvent:FireServer("MainSpawn")
+    wait() -- "task.wait()" yerine "wait()" kullanabilirsiniz.
+end
+    end)
+
+MultiSection:NewButton("EquipAllShuriken","AllShuriken",function()
+        local player = game.Players.LocalPlayer
+local backpack = player.Backpack
+
+for _, item in pairs(backpack:GetChildren()) do
+    if item.Name == "Shuriken" then
+        item.Parent = player.Character
+    end
+end
+    end)
+
+MultiSection:NewButton("HoldShuriken","....",function()
+        local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local Player = Players.LocalPlayer
+local Character = Player.Character
+
+local ShurikenHold = nil
+
+UserInputService.InputBegan:Connect(function(input, isProcessed)
+    if not isProcessed and input.UserInputType == Enum.UserInputType.MouseButton1 then
+        ShurikenHold = RunService.RenderStepped:Connect(function()
+            local shuriken = Character:FindFirstChild("Shuriken")
+            if shuriken and not Player.Backpack:FindFirstChild("Shuriken") then
+                shuriken:Activate()
+            end
+        end)
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input, isProcessed)
+    if not isProcessed and input.UserInputType == Enum.UserInputType.MouseButton1 and ShurikenHold then
+        ShurikenHold:Disconnect()
+        ShurikenHold = nil
+    end
+end)
+    end)
+
+-- Aimbot
+local Aimbot = Window:NewTab("Aimbot")
+local AimbotSection = Aimbot:NewSection("Aimbot")
+
+local TextBoxValue = ""
+local target
+
+local isAiming = false -- Nişan alma işlemi devam ediyor mu?
+local shurikenInHand = false -- Shuriken elinizde mi?
+
+AimbotSection:NewTextBox("PlayerName", "Orginal Player Name", function(txt)
+    TextBoxValue = txt -- Girilen metni TextBoxValue değişkenine atar
+end)
+
+-- Shuriken'in elinizde olup olmadığını kontrol etmek için bir işlev
+function CheckShurikenInHand()
+    if game.Players.LocalPlayer.Character:FindFirstChild("Shuriken") then
+        shurikenInHand = true
+    else
+        shurikenInHand = false
+    end
+end
+
+-- Shuriken'i elinizden bıraktığınızda veya hedef değiştiğinde nişan alma işlemi durdur
+function StopAiming()
+    if isAiming then
+        isAiming = false
+    end
+end
+
+game.Players.LocalPlayer.Character.ChildRemoved:Connect(function(child)
+    if child.Name == "Shuriken" then
+        StopAiming()
+    end
+end)
+
+-- Oyuncunun adını girdiğinizde hedefi belirle ve nişan alma işlemi başlat
+AimbotSection:NewButton("Aimbot", "GUI Aimbot", function()
+    if TextBoxValue ~= "" then
+        target = game.Players:FindFirstChild(TextBoxValue) -- Girilen ismi oyuncu listesinde arar
+        CheckShurikenInHand()
+        if target and shurikenInHand then
+            isAiming = true
+            while isAiming do
+                game.Players.LocalPlayer.Character.Shuriken.HitEvent:FireServer(target.Character.Head.Position)
+                wait(0.1) -- Nişan alma hızını ayarlayabilirsiniz
+                CheckShurikenInHand()
+                if not shurikenInHand then
+                    StopAiming()
+                end
+            end
+        end
+    end
+end)
+
+AimbotSection:NewButton("Esp", "Esp Players", function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
+    end)
+
+--Creating Textboxes
+local Creating = Window:NewTab("Credits")
+local CreatingSection = Creating:NewSection("Credits")
+        CreatingSection:NewButton("deadofgood", "GUI MAKER", function()
+end)
